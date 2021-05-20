@@ -1,0 +1,13 @@
+{
+    "target_overrides": {
+        "*": {
+            "platform.stdio-baud-rate": 115200
+        },
+        "nope":{
+            "target.lse_available": 0
+        },
+        "K64F": {
+            "platform.stdio-baud-rate": 115200
+        }
+    }
+}
