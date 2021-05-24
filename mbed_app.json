@@ -1,13 +1,27 @@
 {
+    "config": {
+        "ntp-server": {
+            "help": "hostname or ip address of the NTP server",
+            "value": "0.be.pool.ntp.org"
+        },
+        "ntp-port": {
+            "help": "TCP port of the NTP server",
+            "value": 123
+        }
+    },
     "target_overrides": {
         "*": {
-            "platform.stdio-baud-rate": 115200
-        },
-        "nope":{
-            "target.lse_available": 0
-        },
-        "K64F": {
-            "platform.stdio-baud-rate": 115200
+            "platform.stdio-baud-rate": 115200,
+            "nsapi.default-wifi-security": "WPA_WPA2",
+            "nsapi.default-wifi-ssid": "\"ssid\"",
+            "nsapi.default-wifi-password": "\"password\"",
+            "rtos.main-thread-stack-size": 8192,
+            "target.network-default-interface-type": "WIFI",
+            "target.macros_add" : ["MBEDTLS_SHA1_C"],
+            "esp8266.tx": "PA_9",
+            "esp8266.rx": "PA_10",
+            "esp8266.debug": true,
+            "esp8266.provide-default": true
         }
     }
 }

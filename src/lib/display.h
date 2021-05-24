@@ -10,6 +10,8 @@ class Display {
     void setSegment(int index, int value);
     void print(int number);
 
+    void setBrightness(float brightness);
+
     private:
 
     void enableAll();
@@ -19,6 +21,8 @@ class Display {
     static const uint8_t NUMBER_OF_CHARACTERS = 4;
     static const uint8_t NUMBER_OF_SEGMENTS = 8;
     static const uint8_t NUMBER_OF_CHANNELS_PER_DRIVER = 16;
+
+    static constexpr float GENERAL_BRIGHTNESS = 0.5;
 
     static constexpr uint8_t channelMap[4][8] = {
         { 15, 13, 11, 9, 7, 5, 3, 1 },

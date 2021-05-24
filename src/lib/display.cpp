@@ -8,6 +8,7 @@ constexpr uint8_t Display::segmentMap[10];
 Display::Display(I2C* i2c, int address_1, int address_2): 
     drivers {TLC59116(i2c, address_1), TLC59116(i2c, address_2) } {
     enableAll();
+    setBrightness(GENERAL_BRIGHTNESS);
 }
 
 void Display::run() {
@@ -49,5 +50,11 @@ void Display::setAllChannels(float brightness) {
         for(int i = 0; i < NUMBER_OF_DRIVERS; i++) {
             drivers[i].setChannel(channel, brightness);
         }
+    }
+}
+
+void Display::setBrightness(float brightness){
+    for(int i = 0; i < NUMBER_OF_DRIVERS; i++) {
+        drivers[i].setBrightness(brightness);
     }
 }
