@@ -22,6 +22,7 @@ Display display(&i2c, I2C_ADDRESS, I2C_ADDRESS + 2);
 MAX44009 sensor(&i2c, 0x94);
 
 Wifi wifi;
+NTPClient* ntp;
 
 EventQueue queue(32 * EVENTS_EVENT_SIZE);
 
@@ -34,8 +35,8 @@ void updateTime() {
     display.print(((ptm->tm_hour+CET) * 100) + ptm->tm_min);
 }
 
-void getNTPTime(NTPClient ntp) {
-    time_t timestamp = ntp.get_timestamp();
+void getNTPTime() {
+    time_t timestamp = ntp->get_timestamp();
     if (timestamp < 0) {
         printf("An error occurred when getting the time. Code: %ld\r\n", timestamp);
     } else {
@@ -50,19 +51,16 @@ void updateBrightness() {
 }
 
 void setupNTP() {
-    NTPClient ntp(wifi.getNet());
-    ntp.set_server(NTP_SERVER, NTP_PORT);
-    getNTPTime(ntp);
+    ntp = new NTPClient(wifi.getNet());
+    ntp->set_server(NTP_SERVER, NTP_PORT);
+    getNTPTime();
 }
 
 int main()
 {
     printf("*** Smart Clock ***\r\n");
-
     display.clear();
-
     wifi.connect();
-
     setupNTP();
 
     queue.call_every(500ms, &led, &StatusLed::toggle);

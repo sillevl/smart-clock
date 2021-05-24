@@ -20,7 +20,7 @@
             "target.macros_add" : ["MBEDTLS_SHA1_C"],
             "esp8266.tx": "PA_9",
             "esp8266.rx": "PA_10",
-            "esp8266.debug": true,
+            "esp8266.debug": false,
             "esp8266.provide-default": true
         }
     }
